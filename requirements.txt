@@ -1,0 +1,7 @@
+numpy>=2.0
+torch>=2.5
+gymnasium[classic-control]>=1.0
+imageio>=2.30
+ipython>=8.0
+jupyter>=1.1
+notebook>=7.0
