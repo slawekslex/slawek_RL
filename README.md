@@ -16,7 +16,7 @@ not just *what* it looks like.
 | [`V4_ppo_clip.ipynb`](V4_ppo_clip.ipynb) | PPO clipped surrogate objective + multiple update passes | −85.3 ± 12.3 |
 | [`V5_kl_advnorm.ipynb`](V5_kl_advnorm.ipynb) | KL early-stopping + advantage normalization | −84.6 ± 21.6 |
 | [`V6_0_parallel_rollout.ipynb`](V6_0_parallel_rollout.ipynb) | Vectorized environments, batched rollout collection (data half) | — |
-| [`V6_1_minibatch_ppo.ipynb`](V6_1_minibatch_ppo.ipynb) | Minibatch PPO updates over the vectorized rollout (training half) | −81.5 ± 8.6 |
+| [`V6_1_minibatch_ppo.ipynb`](V6_1_minibatch_ppo.ipynb) | Minibatch PPO updates over the vectorized rollout (training half) | −83.2 ± 9.6 |
 
 Greedy eval return is the mean ± std episode return of the deterministic (argmax) policy
 on `Acrobot-v1` after training, evaluated at a fixed 15-epoch compute budget so the
