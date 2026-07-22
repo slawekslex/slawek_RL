@@ -34,6 +34,22 @@ minibatches, with several epochs of updates per rollout. V6_0 builds the vectori
 rollout collector; V6_1 builds the minibatch PPO update on top of it. On CPU alone this
 gets a 7–8x throughput improvement over the single-environment loop from V0–V5.
 
+## Continuous control (MuJoCo)
+
+Two forks take the finished V6 pipeline off `Acrobot`'s discrete actions onto continuous
+MuJoCo control, changing as little as possible each step:
+
+| Notebook | Env | Adds | Greedy eval return |
+|---|---|---|---|
+| [`V6_continuous_pendulum.ipynb`](V6_continuous_pendulum.ipynb) | `InvertedPendulum-v5` | Gaussian `Independent(Normal, 1)` policy, action clipping, `ACT_DIM` grids | ~1000 (solved) |
+| [`V6_cheetah.ipynb`](V6_cheetah.ipynb) | `HalfCheetah-v5` | From-scratch observation + return normalization (running mean/std, ±10 clip) | ~3900 ± 90 |
+
+The Gaussian head keeps the PPO update byte-identical to V6_1. `HalfCheetah` is the first
+env where input/return normalization is decisive (without it the policy barely leaves zero);
+it also never terminates, so *every* episode boundary is a 1000-step time-limit and the GAE
+bootstrap is always `V(final_obs)`. `V6_cheetah` records in-progress GIFs at epochs 1 / 25 /
+50 / 100 so you can watch the gait emerge.
+
 ## Setup
 
 ```bash
